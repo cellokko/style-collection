@@ -11,11 +11,10 @@ class Article extends Model
 
     public function images()
     {
-        return $this->hasMany(Image::class); //1つの記事は複数の画像を持っている（1対多）
+        return $this->hasMany(Image::class); 
     }
 
     public function comments()
     {
-        return $this->hasMany(Comment::class); //1つの記事に複数のコメントがつく（1対多）
-    }
+        return $this->hasMany(Comment::class);
 }

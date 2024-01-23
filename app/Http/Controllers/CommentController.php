@@ -31,13 +31,12 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        //コメント内容に入力必須のバリデーションを設定する
         $request->validate([
             'content' => 'required'
         ]);
 
         $comment = new Comment();
-        $comment->user_id = Auth::user()->id; //コメントを作成したユーザーIDを取得
+        $comment->user_id = Auth::user()->id; 
         $comment->user_name = Auth::user()->name;
         $comment->article_id = $request->input('article_id');
         $comment->content = $request->input('content');
@@ -71,11 +70,10 @@ class CommentController extends Controller
     public function update(Request $request, Article $article, Comment $comment)
     {
         if (Auth::user()->id !== $comment->user_id ){
-            abort(500); //abortはエラー画面を返す　404not foundとか
+            abort(500);
         }
         $comment->content = $request->input('content');
         $comment->save();
-        //コメントテーブルのarticle_idを取得。idがないと1つのレコードに絞れない
         $article = Article::find($comment->article_id); 
         
         return redirect()->route('show', compact('article'));
@@ -86,8 +84,6 @@ class CommentController extends Controller
      */
     public function destroy(Article $article, Comment $comment)
     {   
-        //$comment = Comment::find($comment->id);
-        //dd($comment);
         $comment->delete();
         $article = Article::find($comment->article_id); 
 

@@ -4,7 +4,6 @@
             {{ 'レングス別' }}
         </h2>
     </x-slot>
-    {{-- favoriteアクションから星の数順でもらったデータを抽出--}}
     @foreach ($articles as $article)
         <a href="{{ route('show', $article) }}">
             <div class="py-12">

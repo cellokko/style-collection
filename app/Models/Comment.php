@@ -11,11 +11,11 @@ class Comment extends Model
 
     public function article()
     {
-        return $this->belongsTo(Article::class); //1つのコメントは1つの記事に付属する（1対1）
+        return $this->belongsTo(Article::class);
     }
 
     public function user()
     {
-        return $this->belongsTo(User::class); //そのコメントは一人のユーザーに付属する（1対1）
+        return $this->belongsTo(User::class);
     }
 }

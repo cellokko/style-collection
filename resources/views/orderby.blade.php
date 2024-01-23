@@ -1,7 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{-- RequestファサードのrouteIsで、もし（）ルートなら…にする --}}
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">          
             @if (Request::routeIs('latest'))
                 {{ '最新データ' }}
             @elseif (Request::routeIs('favorite'))
@@ -12,7 +11,6 @@
                 {{ 'コメント数' }}
             @endif
         </h2>
-        {{-- sessionにerror_messageがあればその値を表示する --}}
         @if (session('error_message'))
             <p>{{ session('error_message') }}</p>
         @endif
@@ -26,7 +24,6 @@
                         <div class="p-6 text-gray-900 dark-text-gray-100">
 
                             @foreach ($article->images as $image)
-                                {{-- 特定のサイズのときは画像を小さく表示するなど、固定値ではない設定にする --}}
                                 <img class="float-left rounded-3xl" src="{{ asset('/storage/' . $image->img_path) }}"
                                     style="width: 200px">
                             @endforeach
@@ -83,8 +80,6 @@
                     <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-b-lg">
                         <div class="p-6 text-gray-900 dark-text-gray-100">
                             <div class="py-4 border-t-2 border-gray-200">
-                                {{-- aricleに紐づいたコメントのみをひっぱってくると、コントローラで渡さなくてもよくなる。
-                        $article->comments ?? ''：articleにコメントがあれば表示、??なければ''なし。 --}}
                                 @foreach ($article->comments ?? '' as $comment)
                                     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                                         <p class="text-xl">{{ $comment->content }}</p>

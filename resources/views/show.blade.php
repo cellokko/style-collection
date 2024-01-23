@@ -1,4 +1,3 @@
-{{-- x-app-layout =layoutsのapp.blade.phpを使用する --}}
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
@@ -11,17 +10,6 @@
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 text-gray-900 dark-text-gray-100">
-                        {{-- ループ変数を使い、「もし最初の画像であればfloat-leftにし、そうでなければしない」と設定。こうすると画像が横並びになる。←検証画面で探索した結果。
-                        @foreach ($article->images as $image)
-                            @if ($loop->first)
-                                <img class="float-left rounded-3xl" src="{{ asset('/storage/' . $image->img_path) }}"
-                                    style="width: 300px">
-                            @else
-                                <img class="rounded-3xl" src="{{ asset('/storage/' . $image->img_path) }}"
-                                    style="width: 300px">
-                            @endif
-                        @endforeach --}}
-
                         <div class="flex">
                             @foreach ($article->images as $image)
                                 <img class="rounded-3xl w-24 sm:w-80" src="{{ asset('/storage/' . $image->img_path) }}">
@@ -78,8 +66,6 @@
             </div>
         </div>
     </a>
-
-    {{-- border-b-2が下線で太さ2。border-whiteで色を指定 --}}
     <div class="py-3">
         <div class="bg-white shadow-sm border rounded-md border-white">
             <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
@@ -89,8 +75,6 @@
     </div>
 
     <div>
-        {{-- aricleに紐づいたコメントのみをひっぱってくると、コントローラで渡さなくてもよくなる。
-            $article->comments ?? ''：articleにコメントがあれば表示、??なければ''なし。 --}}
         @foreach ($article->comments ?? '' as $comment)
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <p class="text-xl">{{ $comment->content }}</p>
@@ -101,8 +85,6 @@
                         <x-primary-button type=submit>このコメントを編集する</x-primary-button>
                     </a>
                 @endif
-                {{-- @dump($comment->user_id)
-                @dump(Auth::user()->id) --}}
             </div>
         @endforeach
     </div><br>
@@ -120,16 +102,6 @@
                     <input type="hidden" name="article_id" value="{{ $article->id }}">
                     <br>
                     <x-primary-button type="submit">コメントを投稿</x-primary-button>
-
-                    {{-- 薄い青の背景で濃い青文字
-                    <button type="submit"
-                        class="bg-blue-100 text-blue-600 text-base font-semibold px-6 py-2 rounded-lg">コメントを投稿</button>
-                    黒背景で白抜き文字
-                    <button type="submit"
-                        class="px-6 py-2 flex item-center justify-center rounded-md bg-black text-white">コメントを投稿</button>
-                    グレー背景のグレー文字
-                    <button type="submit"
-                        class="px-6 py-2 flex item-center justify-center rounded-md border border-gray-300">コメントを投稿</button> --}}
                 </form>
             </div>
         </div>

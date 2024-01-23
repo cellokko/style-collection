@@ -1,4 +1,3 @@
-{{-- x-app-layout =layoutsのapp.blade.phpを使用する --}}
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
@@ -8,11 +7,10 @@
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-5 ml-30">
         <form action="/post" method="POST" enctype="multipart/form-data">
             @csrf
-            {{-- TODO valueのaiueoを消す --}}
             <table class="text-left leading-10">
                     <tr class="h-20">
                         <th>店舗URL</th>
-                        <td><input type="text" name="shop_url" value="aiueo"></td>
+                        <td><input type="text" name="shop_url"></td>
                     </tr>
                     <tr>
                         <th>日時</th>
@@ -78,7 +76,6 @@
                         </td>
                     </tr>
                     <tr>
-                        {{-- TODO:「レポート」を消す--}}
                         <th>投稿内容</th>
                         <td>
                             <textarea class="form-control" name="report" style="width: max-content" placeholder="自由に記述できます"></textarea>

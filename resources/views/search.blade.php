@@ -1,21 +1,16 @@
 <x-app-layout>
-    {{-- appファイル内のheaderを使用する --}}
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             {{ 'ワード検索' }}
         </h2>
     </x-slot>
-    {{-- searchボックス：/searchのURL末尾に渡したsearch_wordをsearchアクションで取得する。valueは検索履歴 --}}
     <div class="py-12 max-w-7xl mx-auto sm:px-6 lg:px-8">
         <form action="/search" method="get">
-            {{-- inputに入力した文言をとってくる（value） --}}
             <x-text-input type="text" name="search_word" value="{{ request()->search_word }}"/>
                 <br><br>
             <x-primary-button>検索</x-primary-button>
         </form>
     </div>
-    {{-- favoriteアクションからもらったデータ$search_resultを１つずつ取り出す。--}}
-    @foreach ($search_result as $article)
         <a href="{{ route('show', $article) }}">
             <div class="py-12">
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
